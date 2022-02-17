@@ -2,8 +2,8 @@ OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
 {
   OBJECT-PROPERTIES
   {
-    Date=07.07.19;
-    Time=15:49:25;
+    Date=17.02.22;
+    Time=15:45:04;
     Modified=Yes;
     Version List=CDCADV110.00;
   }
@@ -12,7 +12,7 @@ OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
     TableNo=6085590;
     OnRun=BEGIN
             // Process the default Full Capture codeunit first
-            CODEUNIT.RUN(CODEUNIT::"Purch. Doc. - Full Capture",Rec);
+            CODEUNIT.RUN(CODEUNIT::"CDC Purch. - Full Capture",Rec);
 
             FindAllPONumbersInDocument(Rec);
           END;
@@ -42,9 +42,9 @@ OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
       PurchasesPayablesSetup.GET;
       NoSeries.GET(PurchasesPayablesSetup."Order Nos.");
       NoSeriesLine.SETRANGE("Series Code",NoSeries.Code);
-      NoSeriesLine.SETFILTER("Starting Date",'%1|>=%2',0D,TODAY);
+      NoSeriesLine.SETFILTER("Starting Date",'%1|<=%2',0D,TODAY);
       NoSeriesLine.SETRANGE(Open,TRUE);
-      IF NoSeriesLine.FINDFIRST THEN BEGIN
+      IF NoSeriesLine.FINDLAST THEN BEGIN
         Pos := 1;
 
         WHILE (Pos <= STRLEN(NoSeriesLine."Starting No.")) DO BEGIN
@@ -56,12 +56,14 @@ OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
         END;
       END;
 
+      IF STRLEN(FilterString) = 0 THEN
+        EXIT;
       // Iterate through Document Word table and filter for our PO number filter string
       DocumentWord.SETFILTER(Word,FilterString);
       IF DocumentWord.FINDSET THEN
         REPEAT
           // Check if there is a PO in the system with the matched word
-          IF PurchaseHeader.GET(PurchaseHeader."Document Type"::Order,UPPERCASE(DocumentWord.Word)) THEN BEGIN
+          IF PurchaseHeader.GET(PurchaseHeader."Document Type"::Order,COPYSTR(UPPERCASE(DocumentWord.Word),1,MAXSTRLEN(PurchaseHeader."No."))) THEN BEGIN
             // Check if the number exists in the temp. PO buffer
             IF NOT PurchaseHeaderBuffer.GET(PurchaseHeader."Document Type",PurchaseHeader."No.") THEN BEGIN
               PurchaseHeaderBuffer := PurchaseHeader;
@@ -88,4 +90,3 @@ OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
     END.
   }
 }
-
