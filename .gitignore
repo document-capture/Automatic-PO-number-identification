@@ -1,0 +1,3 @@
+source/al-version/.alpackages/*.app
+source/al-version/.vscode/launch.json
+source/al-version/.vscode/rad.json

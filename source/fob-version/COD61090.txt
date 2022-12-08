@@ -1,4 +1,4 @@
-OBJECT Codeunit 61100 CDC Adv. Find All PO Numbers
+OBJECT Codeunit 61090 PTE CDC Find all PO numbers
 {
   OBJECT-PROPERTIES
   {
