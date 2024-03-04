@@ -1,0 +1,39 @@
+{
+  "id": "43b273d9-bd15-485e-b7c9-f2c1a7aba93a",
+  "name": "al-version",
+  "publisher": "github.com/document-capture",
+  "version": "0.9.0.0",
+  "brief": "Extension for Document Capture to find PO internal numbers on a purchase invoice during capturing",
+  "description": "With this extension Document Capture is trying to collect all purchase order numbers on a purchase invoice. The found numbers can later be used for order matching.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "https://github.com/document-capture/",
+  "url": "https://github.com/document-capture/",
+  "logo": "./res/images/logo.png",
+  "dependencies": [
+    {
+      "id": "6da8dd2f-e698-461f-9147-8e404244dd85",
+      "name": "Continia Document Capture",
+      "publisher": "Continia Software",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "19.0.0.0",
+  "idRanges": [
+    {
+      "from": 61090,
+      "to": 61099
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "8.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

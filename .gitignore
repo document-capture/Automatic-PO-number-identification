@@ -1,3 +1,7 @@
 source/al-version/.alpackages/*.app
 source/al-version/.vscode/launch.json
 source/al-version/.vscode/rad.json
+source/archive/*/.alpackages/*.app
+source/archive/*/.vscode/launch.json
+source/archive/*/.vscode/rad.json
+source/al-version/.vscode/.alcache/*.*
